@@ -3,7 +3,7 @@ import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class PostsService {
-    constructor(private readonly userService: UserService) {}
+    // constructor(private readonly userService: UserService) {}
     private posts = [];
 
     getAllPosts() {
