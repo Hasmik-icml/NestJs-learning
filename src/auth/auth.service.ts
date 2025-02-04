@@ -20,19 +20,23 @@ export class AuthService {
             throw new Error("Invalid Credentials");
         }
 
-        const isPasswordValid = await bcrypt.compare(password, user[0].password);
+        const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             throw new Error("Invalid Credentials");
         }
 
-        const payload = { email: user[0].email, sub: user.id };
+        const payload = { email: user.email, sub: user.id };
         const accessToken = this.jwtService.sign(payload);
 
         return { access_token: accessToken };
     }
 
     async logout(userId: UUID) {
-        return {message: 'Successfully logged out'};
+        return { message: 'Successfully logged out' };
+    }
+
+    async refreshAccessToken() {
+
     }
 
 }

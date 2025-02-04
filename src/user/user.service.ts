@@ -1,19 +1,24 @@
 import { Injectable } from "@nestjs/common";
+import { LoginDto } from "src/auth/dto/login.dto";
+import { Repository } from "typeorm";
+import { User } from "./user.entity";
 
 @Injectable()
 export class UserService {
-    private users = [{ email: '', password: '' }];
+    constructor(private readonly userRepository: Repository<User>) { }
 
     getAllUsers() {
-        return this.users;
+        return this.userRepository.find();
     }
 
     findByEmail(email: any) {
-        return this.users.filter(user => user.email === email);
+        return this.userRepository.findOne({
+            where: { email }
+        });
     }
 
-    createUser(user: any) {
-        this.users.push(user);
+    createUser(user: LoginDto) {
+        this.userRepository.save({ email: user.email, password: user.password})
         return { message: "User created" };
     }
 }

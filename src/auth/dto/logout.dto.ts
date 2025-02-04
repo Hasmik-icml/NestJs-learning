@@ -1,8 +1,8 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsString, IsUUID } from "class-validator";
 import { UUID } from "crypto";
 
 export class LogoutDto {
-    @IsString()
+    @IsUUID()
     @IsNotEmpty()
     userId: UUID
 }
